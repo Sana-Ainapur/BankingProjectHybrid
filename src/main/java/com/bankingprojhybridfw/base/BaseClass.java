@@ -5,13 +5,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BaseClass {
 	
-	public static void main(String[] args) {
-		System.setProperty("webdriver.chrome.driver", "D:\\Selenium\\chromedriver.exe");
-		WebDriver driver=new ChromeDriver();
+	public static WebDriver driver;
+	
+	public void launchWebsite (){
+		
+		String projectpath=System.getProperty("user.dir");
+		//getProperty is used to get the current directory for setting project path
+		//current directory
+		System.setProperty("webdriver.chrome.driver", projectpath+"\\drivers\\chromedriver.exe");
+		driver=new ChromeDriver();
 		driver.get("https://demo.guru99.com/V1/index.php");
 		
-		
+	
 		
 	}
+		
+		
+		
+	
 
 }
