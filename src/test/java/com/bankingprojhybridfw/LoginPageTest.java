@@ -1,12 +1,19 @@
 package com.bankingprojhybridfw;
 
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.bankingprojhybridfw.base.BaseClass;
+import com.bankingprojhybridfw.pom.LoginPagePom;
 
 public class LoginPageTest extends BaseClass{
+	
+	LoginPagePom LoginPagePom;
 	
 	@BeforeClass
 	public void setUp() {
@@ -15,9 +22,16 @@ public class LoginPageTest extends BaseClass{
 		
 	}
 	
+	@AfterClass
+	public void tearDown() {
+		driver.close();
+		
+	}
+	
+	
 	@Test
 	public void testTitle() {
-		String pageTitle=(driver.getTitle().trim());
+		String pageTitle=(driver.getTitle().trim()); // to trim the spaces of both the ends
 		
 		if(pageTitle.equalsIgnoreCase("GTPL Bank Home Page")) {
 			
@@ -35,7 +49,7 @@ public class LoginPageTest extends BaseClass{
 	@Test
 	public void testUrl() {
 		
-		String pageUrl=driver.getCurrentUrl();
+		String pageUrl=driver.getCurrentUrl();// super keyword can be used
 		
 		if(pageUrl.contentEquals("https://demo.guru99.com/V1/index.php")) {
 			
@@ -46,16 +60,37 @@ public class LoginPageTest extends BaseClass{
 			System.out.println("Wrong URL is hitted");
 		}	
 		
+	}
+	
+	@Test
+		public void testLoginButton() {
+			LoginPagePom = new LoginPagePom();
+			LoginPagePom.clickLoginBtn();
+			LoginPagePom.alertHandle();
+		}
 		
+	@Test
+	
+	public void testResetButton() {
+		LoginPagePom =new LoginPagePom();
+		LoginPagePom.clickResetBtn();
+		
+		
+		
+	}
+	
+	@Test
+	public void testClickHere() {
+		LoginPagePom.clickHere();
+		String url=driver.getCurrentUrl();
+		driver.get(url);
 		
 	}
 	
 	
 	
-	@AfterClass
-	public void tearDown() {
-		driver.close();
-		
-	}
+	
+	
+	
 
 }
