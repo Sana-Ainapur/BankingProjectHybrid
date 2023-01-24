@@ -1,5 +1,8 @@
 package com.bankingprojhybridfw;
 
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -63,11 +66,14 @@ public class LoginPageTest extends BaseClass{
 	}
 	
 	@Test
-		public void testLoginButton() {
+		public void testLoginButton() throws EncryptedDocumentException, IOException {
 			LoginPagePom = new LoginPagePom();
+			String userid=LoginPagePom.getUserId();
+			String Password=LoginPagePom.getPwd();
+			LoginPagePom.setUserIdPassword(userid, Password);
 			LoginPagePom.clickLoginBtn();
 			LoginPagePom.alertHandle();
-		}
+	}
 		
 	@Test
 	
@@ -76,19 +82,7 @@ public class LoginPageTest extends BaseClass{
 		LoginPagePom.clickResetBtn();
 		
 		
-		
 	}
-	
-	@Test
-	public void testClickHere() {
-		LoginPagePom.clickHere();
-		String url=driver.getCurrentUrl();
-		driver.get(url);
-		
-	}
-	
-	
-	
 	
 	
 	
