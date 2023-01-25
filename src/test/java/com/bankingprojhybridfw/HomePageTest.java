@@ -14,7 +14,9 @@ import com.bankingprojhybridfw.pom.LoginPagePom;
 
 public class HomePageTest extends BaseClass {
   
+	LoginPagePom loginPagePom;
 	HomePagePom homePagePom;
+	CredentialPagePom credentialpagePom;
 	
 	
 	@BeforeClass
@@ -41,11 +43,11 @@ public class HomePageTest extends BaseClass {
 	
 	@Test
 	public void testGetCredentials() throws EncryptedDocumentException, IOException {
-		LoginPagePom LoginPagePom =new LoginPagePom();
-		homePagePom = LoginPagePom.clickHere();
+		loginPagePom=new LoginPagePom();
+		homePagePom = loginPagePom.clickHere();
 		homePagePom.getEmail();
 		//homePagePom.setEmail(email);
-		CredentialPagePom credentialpagePom=homePagePom.clickOnSumbitBtn();
+		credentialpagePom=homePagePom.clickOnSumbitBtn();
 		credentialpagePom.saveNewCredentials();
 		
 	}

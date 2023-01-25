@@ -35,14 +35,16 @@ public class LoginPagePom extends BaseClass {
 	@FindBy(xpath="//a[text()='here']")
 	WebElement getCredential;
 	
-	public void alertHandle() {
+	@FindBy(xpath ="//div[@id='dismiss-button']")
+	WebElement close;
+	
+	@FindBy(xpath="//iframe[@title='3rd party ad content']")
+	WebElement frame;
+	
+	
 		
-		Alert alert=driver.switchTo().alert();
-		
-		System.out.println(alert.getText());
-		
-		alert.accept();
-	}
+
+	
 	
 	public String getUserId() throws EncryptedDocumentException, IOException {
 		
@@ -71,9 +73,28 @@ public class LoginPagePom extends BaseClass {
 	}
 	
 	
-	public void clickLoginBtn() {
+	public BankManagerHomePagePom clickLoginBtn() {
 		btnLogin.click();
 		
+		return new BankManagerHomePagePom();
+		
+	}
+
+//Handling iframe	
+	public void iframeHandle() {
+		driver.switchTo().frame(frame);
+		close.click();
+		driver.switchTo().defaultContent();
+	}
+	
+//Handling the alert
+	public void alertHandle() {
+		
+		Alert alert=driver.switchTo().alert();
+		
+		System.out.println(alert.getText());
+		
+		alert.accept();
 	}
 	
 	
@@ -87,6 +108,9 @@ public class LoginPagePom extends BaseClass {
 	
 	public HomePagePom clickHere() {
 		getCredential.click();
+		if(frame.isDisplayed()) {
+			iframeHandle();
+		}
 		return new HomePagePom();
 		
 		

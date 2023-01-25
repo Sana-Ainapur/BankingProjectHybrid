@@ -44,8 +44,7 @@ public class HomePagePom extends BaseClass{
 	
 	public CredentialPagePom clickOnSumbitBtn() {
 		btnSubmit.click();
-		
-		 return new CredentialPagePom();
+		return new CredentialPagePom();
 	}
 	
 	

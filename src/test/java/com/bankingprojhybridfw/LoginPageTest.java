@@ -25,6 +25,7 @@ public class LoginPageTest extends BaseClass{
 		
 	}
 	
+	
 	@AfterClass
 	public void tearDown() {
 		driver.close();
@@ -72,7 +73,7 @@ public class LoginPageTest extends BaseClass{
 			String Password=LoginPagePom.getPwd();
 			LoginPagePom.setUserIdPassword(userid, Password);
 			LoginPagePom.clickLoginBtn();
-			LoginPagePom.alertHandle();
+			
 	}
 		
 	@Test
