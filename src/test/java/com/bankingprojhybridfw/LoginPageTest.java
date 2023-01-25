@@ -76,7 +76,6 @@ public class LoginPageTest extends BaseClass{
 			
 	}
 		
-	
 	@Test
 	
 	public void testResetButton() {

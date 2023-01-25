@@ -42,8 +42,6 @@ public class LoginPagePom extends BaseClass {
 	WebElement frame;
 	
 	
-		
-
 	
 	
 	public String getUserId() throws EncryptedDocumentException, IOException {
