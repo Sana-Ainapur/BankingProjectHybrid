@@ -79,7 +79,6 @@ public class LoginPagePom extends BaseClass {
 		return new BankManagerHomePagePom();
 		
 	}
-
 //Handling iframe	
 	public void iframeHandle() {
 		driver.switchTo().frame(frame);

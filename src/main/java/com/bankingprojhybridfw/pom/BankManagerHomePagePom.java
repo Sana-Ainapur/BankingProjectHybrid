@@ -44,7 +44,7 @@ public class BankManagerHomePagePom extends BaseClass {
 	@FindBy(linkText = "Log out")
 	WebElement logout;
 		
-	
+	//Creating all the shifts
 	
 	public ManagerHomePagePom clickOnManager() {
 		manager.click();

@@ -20,6 +20,7 @@ public class CredentialPagePom extends  BaseClass {
 	WebElement passwrd;
 	
 	
+	
 	public void saveNewCredentials() {
 		String username=usrnm.getText();
 		System.out.println(username);
