@@ -2,6 +2,7 @@ package com.bankingprojhybridfw;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.util.PropertySource.Util;
 import org.apache.poi.EncryptedDocumentException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -13,10 +14,12 @@ import org.testng.annotations.Test;
 
 import com.bankingprojhybridfw.base.BaseClass;
 import com.bankingprojhybridfw.pom.LoginPagePom;
+import com.bankingprojhybridfw.utility.Utility;
 
 public class LoginPageTest extends BaseClass{
 	
 	LoginPagePom LoginPagePom;
+	Utility utility;
 	
 	@BeforeClass
 	public void setUp() {
@@ -69,9 +72,10 @@ public class LoginPageTest extends BaseClass{
 	@Test
 		public void testLoginButton() throws EncryptedDocumentException, IOException {
 			LoginPagePom = new LoginPagePom();
-			String userid=LoginPagePom.getUserId();
-			String Password=LoginPagePom.getPwd();
-			LoginPagePom.setUserIdPassword(userid, Password);
+			utility=new Utility();
+			String userid=(String)utility.getSingleCellDataFromExcel(0,0,"Login");
+			String password=(String)utility.getSingleCellDataFromExcel(0,1,"Login");
+			LoginPagePom.setUserIdPassword(userid, password);
 			LoginPagePom.clickLoginBtn();
 			
 	}

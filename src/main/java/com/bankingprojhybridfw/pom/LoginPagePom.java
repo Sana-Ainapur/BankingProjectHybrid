@@ -39,12 +39,15 @@ public class LoginPagePom extends BaseClass {
 	WebElement close;
 	
 	@FindBy(xpath="//iframe[@title='3rd party ad content']")
-	WebElement frame;
+	WebElement frame1;
+	
+	@FindBy(xpath="//iframe[@id='ad_iframe']")
+	WebElement frame2;
 	
 	
 	
 	
-	public String getUserId() throws EncryptedDocumentException, IOException {
+	/*public String getUserId() throws EncryptedDocumentException, IOException {
 		
 		FileInputStream fileinputstream=new FileInputStream(projectpath+"\\src\\test\\resources\\ExcelSheet\\BankingGetCredential.xlsx");
 		Sheet sh=WorkbookFactory.create(fileinputstream).getSheet("Login Credentials");
@@ -62,7 +65,10 @@ public class LoginPagePom extends BaseClass {
 		return pwd;
 		
 		
-	}
+	}*/
+	
+	
+	
 	
 	public void setUserIdPassword(String userid, String Password) {
 		userId.sendKeys(userid);
@@ -79,9 +85,17 @@ public class LoginPagePom extends BaseClass {
 	}
 //Handling iframe	
 	public void iframeHandle() {
-		driver.switchTo().frame(frame);
-		close.click();
-		driver.switchTo().defaultContent();
+		driver.switchTo().frame(frame1);
+		if(frame2.isDisplayed()) {
+			driver.switchTo().frame(frame2);
+			close.click();
+			driver.switchTo().defaultContent();
+		}
+		else {
+			close.click();
+			driver.switchTo().defaultContent();
+		}
+		
 	}
 	
 //Handling the alert
@@ -105,7 +119,7 @@ public class LoginPagePom extends BaseClass {
 	
 	public HomePagePom clickHere() {
 		getCredential.click();
-		if(frame.isDisplayed()) {
+		if(frame1.isDisplayed()) {
 			iframeHandle();
 		}
 		return new HomePagePom();

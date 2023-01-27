@@ -27,7 +27,7 @@ public class HomePagePom extends BaseClass{
 	WebElement btnSubmit;
 	
 	
-	public void getEmail() throws EncryptedDocumentException, IOException {
+	/*public void getEmail() throws EncryptedDocumentException, IOException {
 		
 		FileInputStream fileinputstream=new FileInputStream(projectpath+"\\src\\test\\resources\\ExcelSheet\\BankingGetCredential.xlsx");
 		
@@ -35,7 +35,8 @@ public class HomePagePom extends BaseClass{
 		String email=sh.getRow(0).getCell(0).getStringCellValue();
 		//return email;
 		setEmail(email);
-	}
+	}*/
+	
 	
 	public void setEmail(String emailid) {
 		email.sendKeys(emailid);
