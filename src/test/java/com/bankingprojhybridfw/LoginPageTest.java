@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.util.PropertySource.Util;
 import org.apache.poi.EncryptedDocumentException;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -39,16 +40,8 @@ public class LoginPageTest extends BaseClass{
 	@Test
 	public void testTitle() {
 		String pageTitle=(driver.getTitle().trim()); // to trim the spaces of both the ends
+		Assert.assertEquals(pageTitle, "GTPL Bank Home Page");
 		
-		if(pageTitle.equalsIgnoreCase("GTPL Bank Home Page")) {
-			
-			System.out.println("We are on Correct page");
-		}
-		else {
-			
-			System.out.println("We are on Wrong Page");
-			
-		}
 	}
 	
 	
@@ -58,23 +51,26 @@ public class LoginPageTest extends BaseClass{
 		
 		String pageUrl=driver.getCurrentUrl();// super keyword can be used
 		
-		if(pageUrl.contentEquals("https://demo.guru99.com/V1/index.php")) {
+	/*	if(pageUrl.contentEquals("https://demo.guru99.com/V1/index.php")) {
 			
 			System.out.println("Correct URL is hitted");
 		}
 		else
 		{
 			System.out.println("Wrong URL is hitted");
-		}	
+		}	*/
+		
+	
 		
 	}
 	
 	@Test
-		public void testLoginButton() throws EncryptedDocumentException, IOException {
+	public void testLoginButton() throws EncryptedDocumentException, IOException {
 			LoginPagePom = new LoginPagePom();
 			utility=new Utility();
 			String userid=(String)utility.getSingleCellDataFromExcel(0,0,"Login");
-			String password=(String)utility.getSingleCellDataFromExcel(0,1,"Login");
+			Utility utility1=new Utility();
+			String password=(String)utility1.getSingleCellDataFromExcel(0,1,"Login");
 			LoginPagePom.setUserIdPassword(userid, password);
 			LoginPagePom.clickLoginBtn();
 			
@@ -84,12 +80,8 @@ public class LoginPageTest extends BaseClass{
 	
 	public void testResetButton() {
 		LoginPagePom =new LoginPagePom();
-		LoginPagePom.clickResetBtn();
-		
+		LoginPagePom.clickResetBtn();	
 		
 	}
 	
-	
-	
-
 }

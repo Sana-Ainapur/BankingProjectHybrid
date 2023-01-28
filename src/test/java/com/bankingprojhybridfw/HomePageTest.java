@@ -3,6 +3,7 @@ package com.bankingprojhybridfw;
 import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -42,13 +43,15 @@ public class HomePageTest extends BaseClass {
 
 	
 	@Test
-	public void testGetCredentials() throws EncryptedDocumentException, IOException {
+	public void testGetCredentials() throws EncryptedDocumentException, IOException, InterruptedException {
 		loginPagePom=new LoginPagePom();
 		homePagePom = loginPagePom.clickHere();
+		Thread.sleep(5000);
 		utility=new Utility();
 		String email=(String)utility.getSingleCellDataFromExcel(0,0,"Email");
 		//homePagePom.getEmail();
 		homePagePom.setEmail(email);
+		Assert.assertTrue(!email.isBlank());
 		credentialpagePom=homePagePom.clickOnSumbitBtn();
 		credentialpagePom.saveNewCredentials();
 		

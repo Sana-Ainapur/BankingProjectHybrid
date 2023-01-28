@@ -26,6 +26,15 @@ public class HomePagePom extends BaseClass{
 	@FindBy(xpath = "//input[@value='Submit']")
 	WebElement btnSubmit;
 	
+	@FindBy(xpath ="//div[@id='dismiss-button']")
+	WebElement close;
+	
+	@FindBy(xpath="//iframe[@title='3rd party ad content']")
+	WebElement frame1;
+	
+	@FindBy(xpath="//iframe[@id='ad_iframe']")
+	WebElement frame2;
+	
 	
 	/*public void getEmail() throws EncryptedDocumentException, IOException {
 		
@@ -46,9 +55,26 @@ public class HomePagePom extends BaseClass{
 	
 	public CredentialPagePom clickOnSumbitBtn() {
 		btnSubmit.click();
+		/*if(frame1.isDisplayed()) {
+			iframeHandle();
+		}*/
 		return new CredentialPagePom();
 	}
 	
+	//Handling iframe	
+	public void iframeHandle() {
+		driver.switchTo().frame(frame1);
+		if(frame2.isDisplayed()) {
+			driver.switchTo().frame(frame2);
+			close.click();
+			driver.switchTo().defaultContent();
+		}
+		else {
+			close.click();
+			driver.switchTo().defaultContent();
+		}
+		
+	}
 	
 	
 

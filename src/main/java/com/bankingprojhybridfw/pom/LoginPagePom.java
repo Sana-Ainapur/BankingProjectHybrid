@@ -44,7 +44,11 @@ public class LoginPagePom extends BaseClass {
 	@FindBy(xpath="//iframe[@id='ad_iframe']")
 	WebElement frame2;
 	
+	@FindBy(xpath="//label[@id='message23']")
+	WebElement UserIdError;
 	
+	@FindBy(xpath="//label[@id='message18']")
+	WebElement PasswordError;
 	
 	
 	/*public String getUserId() throws EncryptedDocumentException, IOException {
@@ -72,6 +76,7 @@ public class LoginPagePom extends BaseClass {
 	
 	public void setUserIdPassword(String userid, String Password) {
 		userId.sendKeys(userid);
+		
 		password.sendKeys(Password);
 		
 	}
@@ -85,17 +90,17 @@ public class LoginPagePom extends BaseClass {
 	}
 //Handling iframe	
 	public void iframeHandle() {
+		
 		driver.switchTo().frame(frame1);
 		if(frame2.isDisplayed()) {
 			driver.switchTo().frame(frame2);
 			close.click();
 			driver.switchTo().defaultContent();
-		}
-		else {
-			close.click();
-			driver.switchTo().defaultContent();
+	
 		}
 		
+			close.click();
+			driver.switchTo().defaultContent();	
 	}
 	
 //Handling the alert
@@ -111,7 +116,7 @@ public class LoginPagePom extends BaseClass {
 	
 	public void clickResetBtn() {
 		btnReset.click();
-		if((userId.getText()==" ") && (password.getText()==" ")) {
+		if((!(userId.getText().length()>0)) && (!(password.getText().length()>0))) {
 			System.out.println("Reset is Done");
 		}
 	}

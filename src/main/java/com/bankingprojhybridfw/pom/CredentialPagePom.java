@@ -9,10 +9,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.impl.CTAttrImpl;
 
 import com.bankingprojhybridfw.base.BaseClass;
 
 public class CredentialPagePom extends  BaseClass {
+	XSSFWorkbook wb;
+	XSSFSheet sh1;
 	
 	public CredentialPagePom() {
 		
@@ -28,25 +31,29 @@ public class CredentialPagePom extends  BaseClass {
 	
 	
 	public void saveNewCredentials() throws IOException {
-		String username=usrnm.getText();
-		writeinExcelSheet(0, 0,"New Credentials",username);
+		
+		String username=(usrnm.getText()).trim();
 		System.out.println(username);
 		String password=passwrd.getText();
-		writeinExcelSheet(0, 1,"New Credentials",password);
 		System.out.println(password);
+		
+		writeinExcelSheet(0,0,username,1,0,password);
 		
 	}
 	
-	public void writeinExcelSheet(int row, int cell, String SheetName, String value) throws IOException {
+	public void writeinExcelSheet(int row1, int cell1,String value1,int row2, int cell2,String value2) throws IOException {
+		wb = new XSSFWorkbook(); 
+		sh1=wb.createSheet("New Credentials");
 		
-		XSSFWorkbook wb = new XSSFWorkbook(); 
-		XSSFSheet sh1=wb.createSheet(SheetName);
-		sh1.createRow(row).createCell(cell).setCellValue(value);
+		sh1.createRow(row1).createCell(cell1).setCellValue(value1);
+		
+		sh1.createRow(row2).createCell(cell2).setCellValue(value2);
+		
 		FileOutputStream fout=new FileOutputStream(projectpath+"\\src\\test\\resources\\ExcelSheet\\BankingGetCredential.xlsx");
+		
 		wb.write(fout);
 		
 	}
-	
 	
 
 	
