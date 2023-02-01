@@ -1,14 +1,18 @@
 package com.bankingprojhybridfw.utility;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import com.bankingprojhybridfw.base.BaseClass;
 
@@ -82,5 +86,16 @@ public class Utility extends BaseClass{
 		
 	
 	}	
+	
+	public void getScreenshot(String ScreenShotName) throws IOException {
+		
+		File Screenshot=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	
+		String desPath=projectpath+"\\Screenshot\\"+ScreenShotName+".jpeg";
+	
+		FileUtils.copyFile(Screenshot,new File(desPath));
+		
+		
+	}
 	
 }

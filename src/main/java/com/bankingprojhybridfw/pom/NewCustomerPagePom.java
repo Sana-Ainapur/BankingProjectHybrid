@@ -58,6 +58,12 @@ public class NewCustomerPagePom extends BaseClass{
 	WebElement returnHome;
 	
 	
+
+	
+	public void newCustomerName(String name) {
+		customerName.sendKeys(name);
+	}
+	
 	public void clickOnSubmit() {
 		submitButton.click();
 	}
@@ -68,6 +74,10 @@ public class NewCustomerPagePom extends BaseClass{
 	
 	public void clickOnHome() {
 		returnHome.click();
+	}
+	
+	public void sendInfo() {
+		
 	}
 	
 	

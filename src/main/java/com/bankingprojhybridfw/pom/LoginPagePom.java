@@ -3,6 +3,7 @@ package com.bankingprojhybridfw.pom;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -13,6 +14,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.bankingprojhybridfw.base.BaseClass;
+
+import dev.failsafe.internal.util.Assert;
 
 public class LoginPagePom extends BaseClass {
 	
@@ -45,10 +48,10 @@ public class LoginPagePom extends BaseClass {
 	WebElement frame2;
 	
 	@FindBy(xpath="//label[@id='message23']")
-	WebElement UserIdError;
+	public WebElement UserIdError;
 	
 	@FindBy(xpath="//label[@id='message18']")
-	WebElement PasswordError;
+	public WebElement PasswordError;
 	
 	
 	/*public String getUserId() throws EncryptedDocumentException, IOException {
@@ -92,13 +95,13 @@ public class LoginPagePom extends BaseClass {
 	public void iframeHandle() {
 		
 		driver.switchTo().frame(frame1);
-		if(frame2.isDisplayed()) {
+		/*if(frame2.isDisplayed()) {
 			driver.switchTo().frame(frame2);
 			close.click();
 			driver.switchTo().defaultContent();
 	
 		}
-		
+		*/
 			close.click();
 			driver.switchTo().defaultContent();	
 	}
@@ -114,11 +117,18 @@ public class LoginPagePom extends BaseClass {
 	}
 	
 	
-	public void clickResetBtn() {
+	public boolean clickResetBtn() {
+		userId.sendKeys("sasjjx");
+		password.sendKeys("fghafxfh");
 		btnReset.click();
+		
 		if((!(userId.getText().length()>0)) && (!(password.getText().length()>0))) {
-			System.out.println("Reset is Done");
+			return true;
 		}
+		else {
+			return false;
+		}
+		
 	}
 	
 	
@@ -127,11 +137,29 @@ public class LoginPagePom extends BaseClass {
 		if(frame1.isDisplayed()) {
 			iframeHandle();
 		}
+		
+	//	driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
 		return new HomePagePom();
 		
 		
 	}
 	
+	public boolean blankCredentials() {
+		
+		if(UserIdError.isDisplayed() || PasswordError.isDisplayed()) {
+			return true;
+		}
+		else 
+			return false;
+		
+	}
+	
+	public void sendBlankCredentials() {
+		userId.sendKeys("");
+		userId.clear();
+		password.sendKeys("");
+		userId.clear();
+	}
 	
 	
 }

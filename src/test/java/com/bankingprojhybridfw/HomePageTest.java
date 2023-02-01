@@ -1,8 +1,12 @@
 package com.bankingprojhybridfw;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -35,10 +39,7 @@ public class HomePageTest extends BaseClass {
 	@Test
 	public void getUrl() {
 		String url=driver.getCurrentUrl();
-		
-		if(url.equalsIgnoreCase("https://demo.guru99.com/")) {
-			System.out.println("On Home Page");
-		}
+		Assert.assertEquals(url,"https://demo.guru99.com/1");
 	}
 
 	
@@ -46,14 +47,15 @@ public class HomePageTest extends BaseClass {
 	public void testGetCredentials() throws EncryptedDocumentException, IOException, InterruptedException {
 		loginPagePom=new LoginPagePom();
 		homePagePom = loginPagePom.clickHere();
-		Thread.sleep(5000);
 		utility=new Utility();
 		String email=(String)utility.getSingleCellDataFromExcel(0,0,"Email");
 		//homePagePom.getEmail();
 		homePagePom.setEmail(email);
 		Assert.assertTrue(!email.isBlank());
+		utility.getScreenshot("testGetCredentials");
 		credentialpagePom=homePagePom.clickOnSumbitBtn();
 		credentialpagePom.saveNewCredentials();
+	
 		
 	}
 	
