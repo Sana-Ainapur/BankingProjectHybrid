@@ -14,11 +14,19 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.bankingprojhybridfw.base.BaseClass;
 
 public class Utility extends BaseClass{
 
 	FileInputStream fis;
+	
+	public ExtentSparkReporter extentSparkReporter;
+	public ExtentReports  extentReports;
+	public ExtentTest extentTest;
 	
 	public Utility()  {
 		
@@ -98,4 +106,16 @@ public class Utility extends BaseClass{
 		
 	}
 	
+	/*public ExtentReports createExtentReports() {
+		extentSparkReporter=new ExtentSparkReporter(projectpath+"//extentReport//extent.html");
+		extentReports=new ExtentReports();
+		extentReports.attachReporter(extentSparkReporter);
+		return extentReports;
+	}*/
+	
+	/*public void flushReport() {
+		createExtentReports().flush();
+		
+	}*/
+
 }
