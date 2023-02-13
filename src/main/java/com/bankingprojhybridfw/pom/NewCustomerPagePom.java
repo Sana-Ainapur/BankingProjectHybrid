@@ -64,10 +64,10 @@ public class NewCustomerPagePom extends BaseClass{
 	
 	public void selectGender(String gender) {
 		
-		if(gender=="male") {
+		if(gender.equalsIgnoreCase("male")) {
 			genderMaleRadioButton.click();
 		}
-		else if(gender=="female") {
+		else if(gender.equalsIgnoreCase("female")) {
 			genderFemaleRadioButton.click();
 		}
 	}
@@ -75,14 +75,15 @@ public class NewCustomerPagePom extends BaseClass{
 	
 	public void newCustomerName(String name,String gender,String dob,String address,String city,String State,String pin, String telno, String mail) {
 		customerName.sendKeys(name);
+		
 		selectGender(gender);
 		
-		
-		
+		//dateOfBirth.click();
 		dateOfBirth.clear();
-		WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
-		wait.until(ExpectedConditions.elementToBeSelected(dateOfBirth));
 		dateOfBirth.sendKeys(dob);
+		//WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+		//wait.until(ExpectedConditions.elementToBeSelected(dateOfBirth));
+		
 		Address.sendKeys(address);
 		cityName.sendKeys(city);
 		state.sendKeys(State);

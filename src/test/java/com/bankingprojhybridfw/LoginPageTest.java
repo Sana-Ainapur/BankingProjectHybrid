@@ -1,5 +1,17 @@
 package com.bankingprojhybridfw;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
 import java.io.IOException;
 
 import org.apache.logging.log4j.util.PropertySource.Util;
@@ -24,6 +36,10 @@ import com.bankingprojhybridfw.pom.BankManagerHomePagePom;
 import com.bankingprojhybridfw.pom.LoginPagePom;
 import com.bankingprojhybridfw.pom.NewCustomerPagePom;
 import com.bankingprojhybridfw.utility.Utility;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.Parameters;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 @Listeners(MyListener.class)
 
 public class LoginPageTest extends BaseClass{
@@ -39,16 +55,21 @@ public class LoginPageTest extends BaseClass{
 	ExtentReports extentReports;
 	ExtentTest extentTest;
 	
+	
+	
+	@Parameters({"browser")
 	@BeforeClass
-	public void setUp() {
+	public void setUp(String browser) {
 		
-		launchWebsite();
+		launchWebsite(browser);
 		utility=new Utility();
 		//utility.createExtentReports();
 		extentSparkReporter=new ExtentSparkReporter(projectpath+"//extentReport//extent.html");
 		extentReports=new ExtentReports();
 		extentReports.attachReporter(extentSparkReporter);
 	}
+	
+	
 	
 	
 	@AfterClass
@@ -89,10 +110,10 @@ public class LoginPageTest extends BaseClass{
 			LoginPagePom = new LoginPagePom();
 			utility=new Utility();
 			String userid=(String)utility.getSingleCellDataFromExcel(0,0,"Login");
-			softAssert.assertTrue(!userid.isEmpty());
+			Assert.assertTrue(!userid.isEmpty());
 			Utility utility1=new Utility();
 			String password=(String)utility1.getSingleCellDataFromExcel(0,1,"Login");
-			softAssert.assertTrue(!password.isEmpty());
+			Assert.assertTrue(!password.isEmpty());
 			LoginPagePom.setUserIdPassword(userid, password);
 			//softAssert.assertTrue(LoginPagePom.blankCredentials());
 			//utility.getScreenshot("testLoginButton");
@@ -107,12 +128,13 @@ public class LoginPageTest extends BaseClass{
 			
 	}
 	
-	@Test (dependsOnMethods ="testResetButton")
+	@Test (groups = {"sanity"})
 	public void testBlankCrediantials() throws EncryptedDocumentException, IOException {
 		extentTest =extentReports.createTest("testBlankCrediantials");
 		LoginPagePom = new LoginPagePom();
 		LoginPagePom.sendBlankCredentials();
 		extentTest.log(Status.PASS,"Blank Credentials Tested");
+		extentTest.addScreenCaptureFromPath(projectpath+"//Screenshot//testBlankCrediantials.jpeg", "testBlankCrediantials");
 		Assert.assertTrue(LoginPagePom.blankCredentials());
 		
 

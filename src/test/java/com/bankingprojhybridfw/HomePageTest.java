@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.bankingprojhybridfw.base.BaseClass;
@@ -18,6 +19,7 @@ import com.bankingprojhybridfw.pom.HomePagePom;
 import com.bankingprojhybridfw.pom.LoginPagePom;
 import com.bankingprojhybridfw.utility.Utility;
 
+@Listeners(MyListener.class)
 public class HomePageTest extends BaseClass {
   
 	LoginPagePom loginPagePom;

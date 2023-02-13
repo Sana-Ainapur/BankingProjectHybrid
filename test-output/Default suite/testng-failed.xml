@@ -5,9 +5,13 @@
     <classes>
       <class name="com.bankingprojhybridfw.LoginPageTest">
         <methods>
+          <include name="testUrl"/>
           <include name="setUp"/>
-          <include name="tearDown"/>
           <include name="testTitle"/>
+          <include name="tearDown"/>
+          <include name="testBlankCrediantials"/>
+          <include name="testResetButton"/>
+          <include name="testLoginButton"/>
         </methods>
       </class> <!-- com.bankingprojhybridfw.LoginPageTest -->
     </classes>

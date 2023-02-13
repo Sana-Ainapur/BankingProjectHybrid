@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.poi.EncryptedDocumentException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,6 +14,8 @@ import com.bankingprojhybridfw.pom.BankManagerHomePagePom;
 import com.bankingprojhybridfw.pom.LoginPagePom;
 import com.bankingprojhybridfw.pom.NewCustomerPagePom;
 import com.bankingprojhybridfw.utility.Utility;
+
+@Listeners(MyListener.class)
 
 public class NewCustomerPageTest extends BaseClass{
 	
@@ -49,9 +52,10 @@ public class NewCustomerPageTest extends BaseClass{
 		newcustomerpagepom=new NewCustomerPagePom();
 		newcustomerpagepom=bankmanagerpagepom.clickOnNewCustomer();
 		utility=new Utility();
-		String custname=(String)utility.getSingleCellDataFromExcel(1,0,"New Customer");
-		newcustomerpagepom.newCustomerName(custname,"20-10-1991","female","Hno-104,Street no.2","Mumbai","Maharashtra","400001","23452472348","rkumar12@sdhaj.com");
+		//String custname=(String)utility.getSingleCellDataFromExcel(1,0,"New Customer");
+		newcustomerpagepom.newCustomerName("Rakesh Kumar","female","20-10-1991","Hno-104,Street no.2","Mumbai","Maharashtra","400001","23452472348","rkumar12@sdhaj.com");
 		newcustomerpagepom.clickOnSubmit();
+		loginpagepom.alertHandle();
 		Thread.sleep(20000);
 	}
 }
